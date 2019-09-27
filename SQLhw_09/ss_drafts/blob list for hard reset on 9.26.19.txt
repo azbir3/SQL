@@ -1,0 +1,44 @@
+blob's deleted in hard reset
+run git fsck - to get the list
+run ls .git/lost-found - to create an other directory
+run cat .git/lost-found/other/blob number to get contents of the file
+
+
+azbir@LAPTOP-GQNLDMF9 MINGW64 ~/Learn-09-SQL/SQL (master)
+$ git fsck
+Checking object directories: 100% (256/256), done.
+dangling blob 810ec70e83ed830a576cb23aa34aff9d92d72a55 - export from QuickDB
+dangling blob 82f5fe2835e6b918986838deab501728d3050c04 - do not run - unreadable code
+dangling blob 06e0023bc735d3e8860205c82c7fc9aacdde2fe4 - no such directory
+dangling blob 86e1245166bfdb485e61be9260ac651a7797171d - do not run
+dangling blob 886520e9e21ade8fbcdf39c875ac2da2bab83eaf - query 3
+dangling blob 8d99581ec3b19d0cbf7a88002b6dc7c946398b17 - #2 create tables
+dangling blob 901d62b4c8f1151ddabccd2ba953ef7b396674e9 - do not run
+dangling blob 9525578d2fdf6065ba1d9eab450758a3597101ec - query 2 and 4
+dangling blob 96813e8471f69d143dcf59f4cea1915e70c87216 - n.a - drop table prog_lang
+dangling blob 98ba6c2f7f3671e2827e04d07b8f98e0dabc8806 - my create tables
+dangling blob a170b4a06262e9f2c543574a9b74a32bf69a7890 - do not run - datafile
+dangling blob a50c76de2630b456230381f0de7eafbfc8602b0a - create a table, mine, old
+dangling blob 295a9d43077eebc7c061f177bbe966762b050596 - do not run, pandas file
+dangling blob 2c4c9fd652186359378b38dbeb785b803cd51722 - dep_emp file
+dangling blob 2cf90f9b4ed4f6ca534831656672b88067f240fe - dep file
+dangling blob 2d20e2a944f16f144d7db2c4b9339c57697c15ef - create tables - old
+dangling blob 2fd64429bf421126b7000c94ce0f6fd186fbd01f - whatever
+dangling blob 30349492904d6ab76fc13a00d78259b0fb9f8b6a - whatever
+dangling blob ba8f6b3f8e6fe3a49a00b746b4f6be60fdee18fc - create tables export
+dangling blob bb8e914c5f7ef99ae1bd7b9778dd0630e836088f - create tables from export
+dangling blob c20b55c114c937beb79229f13404abc7bcd5d369 - queries with epilogue
+dangling blob 4a8a83529d5e72ac11de06d468eccfbfe96bf6b7 - do not run; huge gibberish 
+dangling blob 4b6b087564fa0ade9760087ac611aaeb9728bed5 - query 1 and 2
+dangling blob 552c25cdd818a9ecc17d83034b2257839eb7a157 - query 6 & 7
+dangling blob d5e0c8c2588090a2f8b61c0a4b870fd0ace1c901 - query 5
+dangling blob ddb1940a98a59eb1f6b832b8d3e2829a3c6dc859 - employees data file
+dangling blob 5e3c3398c34af2288733f20d85c733f747d044af - whatever
+dangling blob 610f6737940282057bb4f555aa18fc0966268352 - titles data file
+dangling blob e2bf23943789a6846595067f0abbb9282a692dc5 - salaries data file
+dangling blob e3c2eae5d799530509e4d781b8c167c84bc342b1 - some version of the tables EDR export
+dangling blob ea734a4e02f23901324a9a38518d2945b0e75b0a - some version of create tables
+dangling blob 6b830278c0908b8b5351726c694435a0f4d08cb6 - whatever
+dangling blob 714a8f088d95356900c84380cca218cb0e6a9dc6 - some version of the tables EDR export
+dangling blob f12a01c444f432f650a280077264d9102112302e - query 1 & 2
+dangling blob faadb57b916c79147c09ea2336c439a6804ec214 - whatever
