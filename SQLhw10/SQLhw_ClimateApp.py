@@ -6,6 +6,7 @@
 
 import numpy as np
 import pandas as pd
+import datetime as dt
 from datetime import date
 import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
@@ -48,7 +49,7 @@ def home():
         f"/api/v1.0/precipitation <br/>"
         f"/api/v1.0/stations <br/>"
         f"/api/v1.0/tobs <br/>"
-        f"/api/v1.0/2016-8-24 <br/>"
+        f"/api/v1.0/2017-06-24 <br/>"
         f"/api/v1.0/2016-11-01/2016-11-30"
     )
 
@@ -83,9 +84,13 @@ def stations():
 @app.route("/api/v1.0/tobs")
 def temp():
     """Return a  JSON list of Temperature Observations (tobs) for the previous year."""
-       
+    #find last date and calculate PY last date
+    last_date = session.query(Measurement.date).order_by(Measurement.date.desc()).first()[0]
+    last_date_CY=dt.datetime.strptime(last_date, '%Y-%m-%d')
+    last_date_PY=last_date_CY - dt.timedelta(days=365)  
+    
     #Query 12 mo tobs
-    temp_data = session.query(Measurement.date, Measurement.tobs).filter(Measurement.date > '2016-08-23')
+    temp_data = session.query(Measurement.date, Measurement.tobs).filter(Measurement.date >last_date_PY)
 
     # Convert list of tuples into normal list
     year_temps = list(temp_data)
@@ -95,12 +100,11 @@ def temp():
 @app.route("/api/v1.0/<start>")
 def start_temps(start):
     """Return a  JSON list of TMIN, TAVG, TMIN for the noted period of time."""
-    #set the date for the query
-    start = date(year=2016,month=8,day=24)
-           
+    #the date for the query is set in step 1 - list of all routes         
     #Query stats as of noted date forward
     temp=[Measurement.date, func.min(Measurement.tobs), func.avg(Measurement.tobs), func.max(Measurement.tobs)]
     temp_start=session.query(*temp).filter(Measurement.date>=start).group_by(Measurement.date).all()
+    
     #write result to a list  
     temp_start_list=list(temp_start)
     return jsonify(temp_start_list)
@@ -108,14 +112,12 @@ def start_temps(start):
 @app.route("/api/v1.0/<start>/<end>")
 def nov_temps(start, end):
     """Return a  JSON list of TMIN, TAVG, TMIN for the noted period of time."""
-    #set the dates for the query
-    start = date(year=2016,month=11,day=1)
-    end = date(year=2016,month=11,day=30) 
-       
+    #the dates for the query are set in step 1 - list of all routes  
     #Query stats for stated period
     temp=[Measurement.date, func.min(Measurement.tobs), func.avg(Measurement.tobs), func.max(Measurement.tobs)]
     temp_stats=session.query(*temp).filter(Measurement.date>=start).\
         filter(Measurement.date<=end).group_by(Measurement.date).all()  
+    
     #write result to a list  
     temp_stats_list=list(temp_stats)
     return jsonify(temp_stats_list)
